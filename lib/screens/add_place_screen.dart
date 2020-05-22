@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_places/widgets/image_inputs.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -30,11 +31,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(),
-                    FlatButton(
-                      onPressed: () {},
-                      child: Text('Add Image'),
-                    ),
+                    ImageInput(),
                   ],
                 ),
               ),
