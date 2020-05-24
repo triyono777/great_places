@@ -16,5 +16,7 @@ class GreatPlaces with ChangeNotifier {
       title: pickkedTitle,
       location: null,
     );
+    _items.add(newPlace);
+    notifyListeners();
   }
 }
