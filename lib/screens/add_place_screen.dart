@@ -15,6 +15,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File _pickedImage;
   void _selectImage(File pickedImage) {
+    print('picked image');
     _pickedImage = pickedImage;
   }
 
@@ -55,7 +56,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           ),
           RaisedButton.icon(
             elevation: 0.0,
-            onPressed: () {},
+            onPressed: _savePlace,
             icon: Icon(Icons.add),
             label: Text('Add place'),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
