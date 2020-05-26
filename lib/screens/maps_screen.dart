@@ -17,6 +17,13 @@ class MapsScreen extends StatefulWidget {
 }
 
 class _MapsScreenState extends State<MapsScreen> {
+  LatLng _pickedLocation;
+  void _selectLocation(LatLng position) {
+    setState(() {
+      _pickedLocation = position;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +36,15 @@ class _MapsScreenState extends State<MapsScreen> {
               widget.initialLocation.longitude),
           zoom: 16,
         ),
+        onTap: widget.isSelecting ? _selectLocation : null,
+        markers: _pickedLocation == null
+            ? null
+            : {
+                Marker(
+                  markerId: MarkerId('m1'),
+                  position: _pickedLocation,
+                ),
+              },
       ),
     );
   }
