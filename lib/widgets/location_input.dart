@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:great_places/screens/maps_screen.dart';
 import 'package:location/location.dart';
 import 'package:great_places/helpers/location_helper.dart';
 
@@ -19,6 +20,20 @@ class _LocationInputState extends State<LocationInput> {
     setState(() {
       _previewImageUrl = staticMapImageUrl;
     });
+  }
+
+  Future<void> _selectOnMap() async {
+    final selectedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MapsScreen(
+          isSelecting: true,
+        ),
+      ),
+    );
+    if (selectedLocation == null) {
+      return;
+    }
+    //...
   }
 
   @override
@@ -49,7 +64,7 @@ class _LocationInputState extends State<LocationInput> {
               textColor: Theme.of(context).primaryColor,
             ),
             FlatButton.icon(
-              onPressed: () {},
+              onPressed: _selectOnMap,
               icon: Icon(Icons.map),
               label: Text('Select on map'),
               textColor: Theme.of(context).primaryColor,
