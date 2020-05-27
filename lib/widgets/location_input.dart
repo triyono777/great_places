@@ -35,6 +35,7 @@ class _LocationInputState extends State<LocationInput> {
     if (selectedLocation == null) {
       return;
     }
+    print(selectedLocation.longitude);
     //...
   }
 
