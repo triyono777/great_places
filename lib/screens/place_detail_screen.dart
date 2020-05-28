@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import '../providers/great_places.dart';
+import './maps_screen.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
+  static const routeName = '/place-detail';
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context).settings.arguments;
@@ -10,7 +14,46 @@ class PlaceDetailScreen extends StatelessWidget {
         Provider.of<GreatPlaces>(context, listen: false).findbyId(id);
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text(selectedPlace.id),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 250,
+            width: double.infinity,
+            child: Image.file(
+              selectedPlace.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            selectedPlace.location.address,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, color: Colors.grey),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (ctx) => MapsScreen(
+                    initialLocation: selectedPlace.location,
+                    isSelecting: false,
+                  ),
+                ),
+              );
+            },
+            child: Text('View on Map'),
+            textColor: Theme.of(context).primaryColor,
+          ),
+        ],
       ),
     );
   }
